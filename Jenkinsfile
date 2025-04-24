@@ -30,5 +30,16 @@ pipeline {
                 }
             }
         }
+
+        stage('Docker Build & Push') {
+            steps {
+                script {
+                    docker.withRegistry('https://index.docker.io/v1/', 'docker-cred') {
+                        def image = docker.build("srineel99/boardgame:latest")
+                        image.push()
+                    }
+                }
+            }
+        }
     }
 }
