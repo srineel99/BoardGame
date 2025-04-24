@@ -47,5 +47,11 @@ pipeline {
                 sh 'trivy image srineel99/boardgame:latest || true'
             }
         }
+
+        stage('Kubernetes Deploy') {
+            steps {
+                sh 'kubectl apply -f deployment-service.yaml'
+            }
+        }
     }
 }
