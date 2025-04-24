@@ -41,5 +41,11 @@ pipeline {
                 }
             }
         }
+
+        stage('Trivy Scan') {
+            steps {
+                sh 'trivy image srineel99/boardgame:latest || true'
+            }
+        }
     }
 }
