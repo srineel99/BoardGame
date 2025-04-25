@@ -26,7 +26,7 @@ pipeline {
         stage('Code Quality Check') {
             steps {
                 withSonarQubeEnv('sonarqube') {
-                    sh "${SCANNER_HOME}/bin/sonar-scanner -Dsonar.projectKey=boardgame -Dsonar.projectName=BoardGame -Dsonar.sources=. -Dsonar.host.url=http://3.111.169.150:9000"
+                    sh "${SCANNER_HOME}/bin/sonar-scanner -Dsonar.projectKey=boardgame -Dsonar.projectName=BoardGame -Dsonar.sources=. -Dsonar.host.url=http://65.2.141.242:9000"
                 }
             }
         }
