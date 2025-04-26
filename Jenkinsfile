@@ -53,5 +53,19 @@ pipeline {
                 sh 'kubectl apply -f deployment-service.yaml'
             }
         }
+
+        stage('Monitoring') {
+            steps {
+                echo 'Validating Prometheus Monitoring Endpoint...'
+                script {
+                    def response = sh(script: "curl -s -o /dev/null -w '%{http_code}' http://15.207.159.240:9090/metrics", returnStdout: true).trim()
+                    if (response != '200') {
+                        error "❌ Prometheus is not responding! HTTP Status: ${response}"
+                    } else {
+                        echo "✅ Prometheus is up and reachable."
+                    }
+                }
+            }
+        }
     }
 }
